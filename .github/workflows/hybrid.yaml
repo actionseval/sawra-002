@@ -1,0 +1,42 @@
+name: CI
+
+# on: [push, pull_request]
+on: [repository_dispatch, workflow_dispatch]
+
+jobs:
+  test_uv_python:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        python-version:
+          - '3.10'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -qy \
+            pkg-config \
+            libdebuginfod-dev \
+            libunwind-dev \
+            liblz4-dev \
+            gdb \
+            npm
+      - run: |
+          uv venv --python ${{ matrix.python-version }}
+      - run: |
+          uv pip install --upgrade pip cython pkgconfig
+      - run: |
+          uv pip install -r requirements-test.txt
+      - run: |
+          make build-js
+      - run: |
+          uv pip install -e .
+      - run: |
+          echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+          uv run pytest -vvv --log-cli-level=info tests
