@@ -15,9 +15,9 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install Dependencies
-        run: |
-          sudo apt install -y appstream apt base-files bash command-not-found coreutils debconf dpkg findutils gpgconf gpgv libapparmor1:amd64 libapt-pkg6.0t64:amd64 libaudit1:amd64 libbz2-1.0:amd64 libc-bin libc6:amd64 libcap-ng0:amd64 libcap2:amd64 libexpat1:amd64 libffi8:amd64 libgcc-s1:amd64 libgcrypt20:amd64 libgmp10:amd64 libgnutls30t64:amd64 libgpg-error0:amd64 libhogweed6t64:amd64 libidn2-0:amd64 liblz4-1:amd64 liblzma5:amd64 libmd0:amd64 libnettle8t64:amd64 libp11-kit0:amd64 libpam-cap:amd64 libpam-modules:amd64 libpcre2-8-0:amd64 libpython3.14-stdlib:amd64 libseccomp2:amd64 libselinux1:amd64 libstdc++6:amd64 libsystemd0:amd64 libtasn1-6:amd64 libudev1:amd64 libunistring5:amd64 libxxhash0:amd64 libzstd1:amd64 locales login lz4 make needrestart packagekit packages-microsoft-prod python3-setuptools python3-zope.interface python3.14 sed snapd sudo tzdata ubuntu-keyring ubuntu-pro-client update-notifier-common xz-utils zlib1g:amd64 zstd
+      # - name: Install Dependencies
+      #   run: |
+          # sudo apt install -y appstream apt base-files bash command-not-found coreutils debconf dpkg findutils gpgconf gpgv libapparmor1:amd64 libapt-pkg6.0t64:amd64 libaudit1:amd64 libbz2-1.0:amd64 libc-bin libc6:amd64 libcap-ng0:amd64 libcap2:amd64 libexpat1:amd64 libffi8:amd64 libgcc-s1:amd64 libgcrypt20:amd64 libgmp10:amd64 libgnutls30t64:amd64 libgpg-error0:amd64 libhogweed6t64:amd64 libidn2-0:amd64 liblz4-1:amd64 liblzma5:amd64 libmd0:amd64 libnettle8t64:amd64 libp11-kit0:amd64 libpam-cap:amd64 libpam-modules:amd64 libpcre2-8-0:amd64 libpython3.14-stdlib:amd64 libseccomp2:amd64 libselinux1:amd64 libstdc++6:amd64 libsystemd0:amd64 libtasn1-6:amd64 libudev1:amd64 libunistring5:amd64 libxxhash0:amd64 libzstd1:amd64 locales login lz4 make needrestart packagekit packages-microsoft-prod python3-setuptools python3-zope.interface python3.14 sed snapd sudo tzdata ubuntu-keyring ubuntu-pro-client update-notifier-common xz-utils zlib1g:amd64 zstd
       - run: |
           uv venv --python 3.14
           sudo apt-get update
