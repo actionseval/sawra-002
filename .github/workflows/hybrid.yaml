@@ -28,7 +28,7 @@ jobs:
             gdb \
             npm
       - run: |
-          uv venv --clear -python ${{ matrix.python-version }}
+          uv venv --clear --python ${{ matrix.python-version }}
       - run: |
           uv pip install --upgrade pip cython pkgconfig
       - run: |
