@@ -1,0 +1,31 @@
+name: agentic
+
+on: workflow_dispatch
+
+jobs:
+  test_uv_python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Build and run tests
+        run: |
+          uv venv --python 3.14
+          sudo apt-get update
+          sudo apt-get install -qy \
+            pkg-config \
+            libdebuginfod-dev \
+            libunwind-dev \
+            liblz4-dev \
+            gdb \
+            npm
+          uv pip install --upgrade pip cython pkgconfig
+          uv pip install -r requirements-test.txt
+          make build-js
+          uv pip install -e .
+          echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+          uv run pytest -vvv --log-cli-level=info tests
