@@ -25,7 +25,7 @@ jobs:
             npm
           uv pip install --upgrade pip cython pkgconfig
           uv pip install -r requirements-test.txt
-          make build-js
+          # make build-js
           uv pip install -e .
           echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
           uv run pytest -vvv --log-cli-level=info tests
